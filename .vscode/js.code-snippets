@@ -1,0 +1,87 @@
+{
+  "router": {
+    "scope": "javascript",
+    "prefix": "router",
+    "body": [
+      "const { Router } = require(\"express\");",
+      "const ${TM_FILENAME/(.*)_(router.js)/${1:/camelcase}/} = require(\"../controllers/${TM_FILENAME/(.*)_(router.js)/${1:/downcase}/}_controller.js\");",
+      "",
+      "const router = Router();",
+      "",
+      "module.exports = router;"
+    ]
+  },
+  "controller": {
+    "scope": "javascript",
+    "prefix": "controller",
+    "body": [
+      "exports.$1Controller = catchAsync(async (req, res, next) => {",
+      "  try {",
+      "    return sendSuccessReponse(res, { });",
+      "  } catch (error) {",
+      "    next(error);",
+      "  }",
+      "});"
+    ]
+  },
+  "model": {
+    "scope": "javascript",
+    "prefix": "model",
+    "body": [
+      "const mongoose = require(\"mongoose\");",
+      "",
+      "const ${TM_FILENAME_BASE/(.*)_model/${1:/pascalcase}/}Schema = new mongoose.Schema({},{timestamps:true});",
+      "",
+      "module.exports = mongoose.model('${TM_FILENAME_BASE/(.*)_model/${1:/downcase}/}s',${TM_FILENAME_BASE/(.*)_model/${1:/pascalcase}/}Schema);"
+    ]
+  },
+  "schema": {
+    "scope": "javascript",
+    "prefix": "schema",
+    "body": ["const $1Schema = new mongoose.Schema({});"]
+  },
+  "Api": {
+    "scope": "javascript",
+    "prefix": "api",
+    "body": [
+      "const { BadReqError } = require(\"../errors/bad_request_error.js\");",
+      "const { catchAsync } = require(\"../utils/catch_async.js\");",
+      "const { ${TM_FILENAME_BASE/(.*)_controller/${1:/pascalcase}/}Model } = require(\"../models/${TM_FILENAME_BASE/(.*)_controller/${1:/downcase}/}_model.js\");",
+      "const { sendSuccessReponse } = require(\"../utils/standard_response.js\");",
+      " ",
+      "exports.get${TM_FILENAME_BASE/(.*)_controller/${1:/pascalcase}/}ByIdController = catchAsync(async (req, res, next) => {",
+
+      "    const ${TM_FILENAME_BASE/(.*)_controller/${1:/camelcase}/}Id = req.params.${TM_FILENAME_BASE/(.*)_controller/${1:/camelcase}/}Id;",
+      "    const ${TM_FILENAME_BASE/(.*)_controller/${1:/camelcase}/} = await ${TM_FILENAME_BASE/(.*)_controller/${1:/pascalcase}/}Model.findById(${TM_FILENAME_BASE/(.*)_controller/${1:/camelcase}/}Id).lean();",
+      "",
+      "    return sendSuccessReponse(res, { data: ${TM_FILENAME_BASE/(.*)_controller/${1:/camelcase}/} });",
+      "});",
+      " ",
+      " ",
+      "exports.get${TM_FILENAME_BASE/(.*)_controller/${1:/pascalcase}/}sController = catchAsync(async (req, res, next) => {",
+
+      "    return sendSuccessReponse(res, { });",
+      "});",
+      " ",
+      " ",
+      "exports.create${TM_FILENAME_BASE/(.*)_controller/${1:/pascalcase}/}Controller = catchAsync(async (req, res, next) => {",
+
+      "    return sendSuccessReponse(res, { });",
+      "});",
+      " ",
+      " ",
+      "exports.update${TM_FILENAME_BASE/(.*)_controller/${1:/pascalcase}/}Controller = catchAsync(async (req, res, next) => {",
+
+      "    return sendSuccessReponse(res, { });",
+      "});",
+      " ",
+      " ",
+      " ",
+      "exports.delete${TM_FILENAME_BASE/(.*)_controller/${1:/pascalcase}/}Controller = catchAsync(async (req, res, next) => {",
+
+      "    return sendSuccessReponse(res, { });",
+      "});",
+      " "
+    ]
+  }
+}

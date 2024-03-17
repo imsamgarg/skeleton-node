@@ -1,0 +1,10 @@
+{
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node --env-file=.env.prod server.js",
+    "start-test": "nodemon --env-file=.env.test server.js",
+    "start-qa": "nodemon --env-file=.env.qa server.js",
+    "start-debug": "node --inspect --env-file=.env.test server.js"
+  }
+}
