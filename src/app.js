@@ -20,7 +20,7 @@ if (env.isTestEnv) {
 }
 
 app.use(authMiddleware.authMiddleware);
-// DO NOT EDIT THIS LINE: ROUTES
+// DO NOT EDIT THIS LINE: <ROUTES>
 
 app.use(authMiddleware.allowedForOnly([adminRole]));
 // ---- Admin routes ------
