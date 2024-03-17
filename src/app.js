@@ -7,6 +7,8 @@ const { adminRole } = require("./models/user_model.js");
 
 const authMiddleware = require("./middlewares/auth_middleware.js");
 
+// DO NOT EDIT THIS SECTION: <ROUTE-IMPORTS>
+
 const app = express();
 
 app.use(morgan("tiny"));
